@@ -80,6 +80,8 @@ a:hover {
 
 #mainContainContainer {
     padding: 10px 30px;
+    display: flex;
+    flex: 1;
 }
 
 /*.navShowHide{*/
@@ -129,4 +131,12 @@ a:hover {
 #mastHeadContainer .searchBarContainer button img {
     height: 20px;
     width: 20px;
+}
+
+.column {
+    background-color: #fff;
+    flex: 1;
+    min-height: 300px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
 }
