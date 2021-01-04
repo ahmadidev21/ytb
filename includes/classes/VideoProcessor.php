@@ -28,7 +28,15 @@ class VideoProcessor
         $tempFilePath = str_replace(" ", "_", $tempFilePath);
 
         $isValidData = $this->processData($videoData, $tempFilePath);
-       
+
+        if(!$isValidData){
+            return false;
+        }
+
+        if(move_uploaded_file($videoData["tmp_name"], $tempFilePath)){
+            echo "file moved successfully";
+        }
+
     }
 
     private function processData($videoData, $filePath)
@@ -36,13 +44,16 @@ class VideoProcessor
         $videoType = pathinfo($filePath, PATHINFO_EXTENSION);
         if (! $this->isValidSize($videoData)) {
             echo "File Too Large. Can't more be than" . $this->sizeLimit . "bytes.";
-
             return false;
         } elseif (! $this->isValidType($videoType)) {
             echo "Invalid file type";
-
+            return false;
+        }elseif($this->hasError($videoData)){
+            echo "Video Error is ". $videoData["error"];
             return false;
         }
+
+        return true;
     }
 
     private function isValidSize($data)
@@ -55,6 +66,11 @@ class VideoProcessor
         $lowercaded = strtolower($videoType);
 
         return in_array($lowercaded, $this->allowedTypes);
+    }
+
+    private function hasError($videoData)
+    {
+        return $videoData["error"] != 0;
     }
 }
 
