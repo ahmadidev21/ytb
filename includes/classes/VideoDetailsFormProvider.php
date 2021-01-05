@@ -54,8 +54,8 @@ class VideoDetailsFormProvider
     {
         return "<div class='form-group'>
                     <select name='privacyInput' class='form-control'>
-                        <option value='0'>public</option>
-                        <option value='1'>private</option>
+                        <option value='1'>public</option>
+                        <option value='2'>private</option>
                     </select>
                 </div>";
     }
